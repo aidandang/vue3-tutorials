@@ -12,11 +12,13 @@
 <script>
 import useLogin from '@/composables/useLogin';
 import { ref } from '@vue/reactivity';
+import { useRouter } from 'vue-router';
 
 export default {
 	name: 'Login',
 	setup() {
 		const { login, error, isPending } = useLogin();
+		const router = useRouter();
 
 		const email = ref('');
 		const password = ref('');
@@ -25,7 +27,7 @@ export default {
 			const res = await login(email.value, password.value);
 
 			if (!error.value) {
-				console.log('user logged in');
+				router.push({ name: 'UserPlaylists' });
 			}
 		};
 
