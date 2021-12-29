@@ -1,14 +1,16 @@
 <template>
+	<PromoBar />
 	<Navbar />
 	<router-view />
 </template>
 
 <script>
+import PromoBar from './components/PromoBar.vue';
 import Navbar from './components/Navbar.vue';
 
 export default {
 	name: 'App',
-	components: { Navbar },
+	components: { PromoBar, Navbar },
 	setup() {},
 };
 </script>
