@@ -1,16 +1,23 @@
-import { ref } from 'vue';
+// take in an array of posts
+// create a new tag set (so no duplicates)
+// add the tags of each post to the tag set
+// return a a single array of tags based on the set
+
+import { ref } from 'vue'
 
 const useTags = (posts) => {
-	const tags = ref([]);
-	const tagSet = new Set();
 
-	posts.forEach((item) => {
-		item.tags.forEach((tag) => tagSet.add(tag));
-	});
+  const tags = ref([])
+  const tagSet = new Set()
 
-	tags.value = [...tagSet];
+  posts.forEach(item => {
+    item.tags.forEach(tag => tagSet.add(tag))
+  })
 
-	return { tags };
-};
+  tags.value = [...tagSet]
 
-export default useTags;
+  return { tags }
+
+}
+
+export default useTags

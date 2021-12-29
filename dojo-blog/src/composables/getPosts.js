@@ -1,26 +1,28 @@
-import { ref } from 'vue';
-import { projectFirestore } from '../firebase/config';
+import { ref } from 'vue'
+import { projectFirestore } from '../firebase/config'
 
 const getPosts = () => {
-	const posts = ref([]);
-	const error = ref(null);
 
-	const load = async () => {
-		try {
-			const res = await projectFirestore
-				.collection('posts')
-				.orderBy('createdAt', 'desc')
-				.get();
+  const posts = ref([])
+  const error = ref(null)
 
-			posts.value = res.docs.map((doc) => {
-				return { ...doc.data(), id: doc.id };
-			});
-		} catch (err) {
-			error.value = err.message;
-		}
-	};
+  const load = async () => {
+    try {
+      const res = await projectFirestore.collection('posts')
+        //.orderBy('title', 'desc')
+        .orderBy('createdAt', 'desc')  
+        .get()
 
-	return { posts, error, load };
-};
+      posts.value = res.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+      })
+    }
+    catch(err) {
+      error.value = err.message
+    }
+  }
 
-export default getPosts;
+  return { posts, error, load }
+}
+
+export default getPosts
